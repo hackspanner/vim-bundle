@@ -22,6 +22,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-dispatch'
+Plugin 'tpope/vim-fugitive'
 Plugin 'OmniSharp/omnisharp-vim'
 Plugin 'vim-scripts/UltiSnips'
 Plugin 'vim-jp/ctags'
@@ -32,6 +33,8 @@ Plugin 'lambdatoast/elm.vim'
 Plugin 'vim-scripts/paredit.vim'
 Plugin 'vim-scripts/VimClojure'
 Plugin 'derekwyatt/vim-scala'
+"Plugin 'vim-scripts/ShaderHighLight'
+Plugin 'mingchaoyan/vim-shaderlab'
 Plugin 'tpope/vim-fireplace'
 Plugin 'lfex/vim-lfe'
 Plugin 'vim-airline/vim-airline'
@@ -57,6 +60,7 @@ set expandtab
 set number
 set nowrap
 set laststatus=2 "show airline in a single window
+set smartcase
 
 " setup backup/autosave dirs
 if has("win32")
@@ -75,7 +79,9 @@ imap jk <Esc>
 "
 " OMNISHARP settings
 "
-
+"Set server type
+"let g:OmniSharp_server_type = 'v1'
+let g:OmniSharp_server_type = 'roslyn'
 "don't autoselect first item in omnicomplete, show if only one item (for preview)
 "remove preview if you don't want to see any documentation whatsoever.
 set completeopt=longest,menuone,preview
@@ -83,9 +89,9 @@ set completeopt=longest,menuone,preview
 "You might also want to look at the echodoc plugin
 set splitbelow
 " Get Code Issues and syntax errors
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+" let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
 " If you are using the omnisharp-roslyn backend, use the following
-" let g:syntastic_cs_checkers = ['code_checker']
+let g:syntastic_cs_checkers = ['code_checker']
 
 augroup omnisharp_commands
     autocmd!
@@ -155,11 +161,18 @@ set hidden
 " Enable snippet completion, requires completeopt-=preview
 let g:OmniSharp_want_snippet=1
 
+" enable roslyn server, manual start/stop
+let g:OmniSharp_server_type = 'roslyn'
+let g:OmniSharp_start_server = 0
+let g:OmniSharp_stop_server = 0
+
 "
 " OMNISHARP end
 "
 
+" Per filetype tabstops
+autocmd Filetype cs setlocal ts=4 sw=4 sts=4 expandtab
 
 colorscheme koehler
-set guifont=Source_Code_Pro:h9:cANSI:qDRAFT
+set guifont=Source_Code_Pro:h13:cANSI:qDRAFT
 
