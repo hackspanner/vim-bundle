@@ -170,6 +170,10 @@ let g:OmniSharp_stop_server = 0
 " OMNISHARP end
 "
 
+" MY CUSTOM KEYS
+" F5 = delete all trailing whitespace
+:nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
 " Per filetype tabstops
 autocmd Filetype cs setlocal ts=4 sw=4 sts=4 expandtab
 
